@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Pong Game</title>
+    <style>
+        /* Basic styles for the pong game */
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: black; }
+        canvas { border: 1px solid white; }
+    </style>
+</head>
+<body>
+    <canvas id="pong" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('pong');
+        const context = canvas.getContext('2d');
+
+        // Create the pong paddle
+        const paddleWidth = 10, paddleHeight = 100;
+        let player1Y = canvas.height / 2 - paddleHeight / 2;
+        let player2Y = canvas.height / 2 - paddleHeight / 2;
+
+        function drawPaddle(x, y) {
+            context.fillStyle = 'white';
+            context.fillRect(x, y, paddleWidth, paddleHeight);
+        }
+
+        // Game draw function
+        function draw() {
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            drawPaddle(0, player1Y);
+            drawPaddle(canvas.width - paddleWidth, player2Y);
+        }
+
+        // Main game loop
+        function gameLoop() {
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        gameLoop();
+    </script>
+</body>
+</html>
